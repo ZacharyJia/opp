@@ -135,6 +135,5 @@ After creating the file, open the entire model folder in CLion to edit, analyze,
 ## 7. Donations
 If you find this tool useful, feel free to make a donation! 🥳🥳🥳
 
-![WeChat Pay](https://github.com/user-attachments/assets/dc08faa6-5612-4da4-8ac6-972541318cd9)
-![Alipay](https://github.com/user-attachments/assets/874c0c46-f7e5-40ce-a598-5899b261bb24)
-
+<img src="https://github.com/user-attachments/assets/dc08faa6-5612-4da4-8ac6-972541318cd9" width="200" alt="Wechat Pay" />
+<img src="https://github.com/user-attachments/assets/874c0c46-f7e5-40ce-a598-5899b261bb24" width="200" alt="Alipay" />
