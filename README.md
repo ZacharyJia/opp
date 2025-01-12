@@ -34,6 +34,8 @@ OPNET是一个用于网络仿真的软件，其进程模型是OPNET的核心部�
 ## 4. 使用
 
 ### 4.1 安装与使用
+[点击查找最新版本下载](https://github.com/ZacharyJia/opp/releases)
+
 OP-Plus是一个命令行工具，预编译的可执行文件为`opp.exe`。
 下载完成后可以直接拷贝到OPNET安装目录下，例如：`C:\OPNET\14.5.A\sys\pc_amd_win64\bin`。注意我们只提供了64-bit的可执行程序，因此必须放到pc_amd_win64目录下。
 
