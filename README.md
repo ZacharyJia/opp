@@ -1,139 +1,140 @@
 # OP-Plus
-一款神奇的 OPNET(Riverbed) Modeler 模型转换工具，享受更现代的 OPNET 开发体验
+A magical OPNET (Riverbed) Modeler model conversion tool, help you to enjoy a more modern OPNET development experience.
 
-> [!WARNING]  
-> **注意！**  
-> OP-Plus会修改你的模型文件，使用过程中请务必做好备份。  
-> 尽管软件本身已经提供了自动模型备份，但我们无法100%保证本工具没有Bug，**使用本工具带来的一切损失由使用人自行负责。**
+[[English]](https://github.com/ZacharyJia/opp/blob/master/README.md) [[中文]](https://github.com/ZacharyJia/opp/blob/master/README-CN.md)
 
+
+> [!WARNING]
+> OP-Plus will modify your model files. Please make sure to backup your files before using.
+Although the software provides automatic model backup, we cannot 100% guarantee this tool is bug-free. **Users are responsible for any losses caused by using this tool**.
 
 
 https://github.com/user-attachments/assets/9480659b-ff3f-4799-9ab0-da5b2c702c73
 
 
-## 1. 简介
-OP-Plus是一个针对OPNET(Riverbed Modeler)的进程模型的扩展，主要作用是将OPNET的进程模型文件 (.pr.m) 中的代码转换为纯文本文件形式的代码，以便于使用IDE（VSCode、CLion）进行代码的查看、编辑、分析等操作，并支持其他更高级的功能（**代码提示**、**Copilot支持**等）。OP-Plus的目标是大幅度提高OPNET的进程模型的开发效率，使得OPNET的进程模型开发更加便捷、高效。
-
+## 1. Introduction
+OP-Plus is an extension for OPNET (Riverbed Modeler) process models, designed to convert the code in OPNET process model files (.pr.m) into plain-text files. This enables users to view, edit, and analyze the code using modern IDEs (such as VSCode and CLion) and utilize advanced features like **code suggestions** and **Copilot support**. The goal of OP-Plus is to significantly improve the development efficiency of OPNET process models, making the process more convenient and productive.
 
 ## 2. Motivation
-OPNET是一个用于网络仿真的软件，其进程模型是OPNET的核心部分，是OPNET的仿真引擎。OPNET的进程模型使用C语言编写，但是为了实现基于图形化界面的开发，OPNET的进程模型代码是以二进制文件的形式存储的代码段（状态进入代码、状态退出代码、函数代码等等），这使得OPNET的进程模型代码只能在OPNET的（非常原始的）代码编辑器界面中进行查看、编辑，无法直接使用IDE进行代码的查看、编辑、分析等操作，大大降低了进程模型的开发效率。
+OPNET is a network simulation software, and its process models are core parts of the simulation engine. While OPNET's process models are written in C, they are stored as binary files (code segments for state entry, state exit, functions, etc.) to support graphical development. This restricts code viewing and editing to OPNET's built-in (and very outdated) editor, preventing the use of modern IDEs. This limitation severely reduces development efficiency.
 
-此外，二进制文件的形式也使得OPNET的进程模型代码无法使用版本控制工具进行版本管理，进而无法实现代码的版本追踪、多人协作开发等功能。这使得OPNET的进程模型代码的开发、维护、管理等工作变得非常困难，大大落后于现代软件开发的标准。
+Furthermore, because the process models are stored in binary form, they cannot be managed with version control tools. This makes it impossible to track changes, manage versions, or enable collaborative development, complicating maintenance and development workflows. These challenges are far below the standards of modern software development practices.
 
-为了能够更好地开发、维护、管理OPNET的进程模型代码，我开发了OP-Plus，将OPNET的进程模型代码转换为纯文本文件形式的代码，以便于使用IDE进行代码的查看、编辑、分析等操作，并支持其他更高级的功能（代码提示、Copilot支持等），也使得OPNET的进程模型代码可以使用版本控制工具进行版本管理，进而实现代码的版本追踪、多人协作开发等功能。最终目标是大幅度提高OPNET的进程模型的开发效率，使得OPNET的进程模型开发更加便捷、高效。
+To address these issues, we developed OP-Plus, which converts OPNET process model code into plain-text files. This allows users to edit, analyze, and manage the code using modern IDEs and version control tools. OP-Plus also enables advanced IDE features like code suggestions and Copilot integration, ultimately streamlining the development and management of OPNET process models.
 
-## 3. 主要功能
-- 通过模型转换，将OPNET的进程模型代码转换为纯文本文件形式的代码
-- 支持任意进程模型的转换，包括OPNET标准进程模型，无特殊限制
-- 在文本文件中修改代码后，无需进行代码转换，可以直接在OPNET中编译运行
-- 支持VSCode、CLion等IDE
-- 支持IDE的代码提示、代码高亮和补全等功能
-- 支持使用git等版本控制工具进行版本管理
-- 支持IDE的Copilot等高级功能
+## 3. Features
+- Converts OPNET process model code into plain-text files.
+- Supports the conversion of any process model, including standard OPNET process models, with no specific limitations.
+- Code modifications in the plain-text files can be compiled and run directly in OPNET without requiring re-conversion back.
+- Compatible with IDEs such as VSCode and CLion.
+- Enables IDE features such as code suggestions, syntax highlighting, and autocompletion.
+- Supports version control tools like Git for managing versions and collaborative development.
+- Integrates with advanced IDE features like Copilot.
 
-## 4. 使用
+## 4. Usage
 
-### 4.1 安装与使用
-[点击查找最新版本下载](https://github.com/ZacharyJia/opp/releases)
+### 4.1 Installation and Usage
+[Click here to download the latest version](https://github.com/ZacharyJia/opp/releases)
 
-OP-Plus是一个命令行工具，预编译的可执行文件为`opp.exe`。
-下载完成后可以直接拷贝到OPNET安装目录下，例如：`C:\OPNET\14.5.A\sys\pc_amd_win64\bin`。注意我们只提供了64-bit的可执行程序，因此必须放到pc_amd_win64目录下。
+OP-Plus is a command-line tool, with a precompiled executable named `opp.exe`.
 
-使用方法如下：
+After downloading, you can copy it to the OPNET installation directory, for example: `C:\OPNET\14.5.A\sys\pc_amd_win64\bin`. Note that only a 64-bit executable is provided, so it must be placed in the `pc_amd_win64` directory.
+
+To use OP-Plus, execute the following command:
 ```shell
 opp.exe --model <full model path> [options]
 ```
 
-其中：
-- `<full model path>`为OPNET的进程模型文件的完整路径，
-- `[options]`为可选参数，具体参数如下：
-  - `--update-sv`: 仅更新状态变量
-  - `--update-state [state-name]`: 仅更新指定状态的代码
-  - `--no-backup`: OPP默认会在转换前备份原始文件，使用此选项可以禁止备份，使用时请注意风险
-  - `--help`: 显示帮助信息
+Parameters:
+- `<full model path>`: The full path to the OPNET process model file.
+- `[options]`: Optional parameters:
+  - `--update-sv`: Updates only the state variables.
+  - `--update-state [state-name]`: Updates only the code for a specific state.
+  - `--no-backup`: Disables the default automatic backup before conversion. **Use with caution.**
+  - `--help`: Displays help information.
 
-在不添加任何参数的情况下，OP-Plus会将OPNET的进程模型文件转换为纯文本文件形式的代码，转换后的文件会保存在原始文件的同一目录下创建一个同名的文件夹，文件夹中包含了转换后的代码文件，通常包括：
-- `header_block.h`: 包含了进程模型中的header block代码
-- `function_block.cpp`: 包含了进程模型中的function block代码
-- `sv.h`: 包含了进程模型中的sv代码，**注意：这部分代码是只读的，要修改sv请在OPNET的进程编辑器中修改，在此处的修改不生效。**
-- `tv.h`: 包含了进程模型中的tv代码，这部分是可以修改生效的
-- `diag_block.cpp`: 包含了进程模型中的diag block代码
-- `term_block.cpp`: 包含了进程模型中的termination block代码
-- `state_[state-name]_enter.cpp`: 包含了进程模型中指定状态的状态进入代码
-- `state_[state-name]_exit.cpp`: 包含了进程模型中指定状态的状态退出代码
+Without any options, OP-Plus will convert the OPNET process model file into plain-text files. The converted files will be stored in a folder with the same name as the original file, located in the same directory. The folder will typically include:
+- `header_block.h`: Contains the header block code from the process model.
+- `function_block.cpp`: Contains the function block code from the process model.
+- `sv.h`: Contains the state variable (sv) code. **Note: This code is read-only. To modify sv, use OPNET's process editor. Changes made here will not take effect.**
+- `tv.h`: Contains the temporary variable (tv) code, which can be modified.
+- `diag_block.cpp`: Contains the diagnostic block code from the process model.
+- `term_block.cpp`: Contains the termination block code from the process model.
+- `state_[state-name]_enter.cpp`: Contains the state entry code for a specific state.
+- `state_[state-name]_exit.cpp`: Contains the state exit code for a specific state.
 
-在转换后，可以使用VSCode、CLion等IDE打开转换后的文件夹，进行代码的查看、编辑、分析等操作。在修改代码后，可以直接在OPNET中编译运行，无需进行代码转换。
+After conversion, you can use IDEs like VSCode or CLion to view, edit, and analyze the code. Modified code can be directly compiled and run in OPNET without re-conversion.
 
-### 4.2 常见工作流
-1. 对于从来没有转换过的模型，执行一次不加任何options的完整转换（**务必不要对同一模型进行重复转换，会丢代码**）；
-2. 对模型进行开发，所有代码工作都可以在转换之后的纯文本文件中进行。
-3. 所有其他操作仍在OPNET的图形界面中进行；
-4. 修改代码之后，如果要生效，请在OP图形界面中点击编译，然后运行仿真；
-5. 如果在OP中修改了进程模型的SV，则执行更新：opp.exe --models <model path> **--update-sv**；
-6. 如果在OP中的状态机中增加了新的状态，则执行更新：opp.exe --models <model path> **--update-state <新增加的状态名>**；
-7. 如果在OP中的状态机中删除了原有的状态，可以手动操作删除掉 对应的 `state_[state-name]_enter.cpp` 和 `state_[state-name]_exit.cpp` 文件，也可以无需理会，避免误删文件。
+### 4.2 Recommended Workflow
+1. For models that have never been converted before, perform a full conversion without any options (**Do not convert the same model multiple times, as it may result in code loss**).
+2. Writing codes using the plain-text files.
+3. Perform all other operations within OPNET’s graphical interface.
+4. After modifying the code, compile it in the OPNET graphical interface, then run the simulation.
+5. If you modify the state variables (SV) in OPNET, update them using the command:
+   ```shell
+   opp.exe --model <model path> --update-sv
+   ```
+6. If you add new states to the state machine in OPNET, update them using the command:
+   ```shell
+   opp.exe --model <model path> --update-state <new state name>
+   ```
+7. If you delete states from the state machine in OPNET, manually delete the corresponding `state_[state-name]_enter.cpp` and `state_[state-name]_exit.cpp` files, or simply leave them untouched to avoid accidental deletions.
 
-
-## 5. IDE支持
-OP-Plus支持VSCode、CLion等IDE，可以使用这些IDE进行代码的查看、编辑、分析等操作，也支持这些IDE的代码提示、代码高亮和补全等功能，但是需要进行一些配置。
+## 5. IDE Support
+OP-Plus supports IDEs like VSCode and CLion, enabling features such as code viewing, editing, and analysis. Configuration steps are provided below.
 
 ### 5.1 CLion
-
-在整个模型目录的根目录下创建一个`CMakeLists.txt`文件，内容如下：
+Create a `CMakeLists.txt` file in the root directory of the model folder, with the following content:
 ```cmake
 cmake_minimum_required(VERSION 3.17)
 project(OPNET)
 
-set(CMAKE_CXX_STANDARD 98)  # 设置C++标准为C++98，适配VS2010等，VS2013及以上可以使用C++11
+set(CMAKE_CXX_STANDARD 98)  # Set C++ standard to C++98 for compatibility with VS2010. For VS2013 or later, use C++11.
 
-# 添加头文件搜索路径，建议每个模型产生的文件夹都添加进来，无pr.m后缀
+# Add header file search paths. Include each model folder without the .pr.m suffix.
 include_directories(.)
-include_directories(<模型名1>)
-include_directories(<模型名2>)
+include_directories(<model_name1>)
+include_directories(<model_name2>)
 
-
-# 添加一个神奇的定义
+# Add a magic definition.
 add_definitions(-DNSE_VSC_MAGIC_DEF)
 
-# 添加系统头文件搜索路径，默认在C盘，根据实际OPNET安装位置调整
+# Add system header file search paths. Adjust according to the actual OPNET installation path.
 include_directories("C:/Riverbed/18.6/sys/include" "C:/Riverbed/18.6/models/std/include")
 
-# 添加第三方库的头文件 （Optional，如果需要第三方库支持的话则添加）
+# Add third-party library headers (optional).
 #include_directories("thirdparty/libzmq-prebuilt-4.3.5/include")
 
-# 将各目录下的所有文件都添加到变量SRC_LIST中
-aux_source_directory(<模型名1> SRC_LIST)
-aux_source_directory(<模型名2> SRC_LIST)
+# Add all files from model directories to the SRC_LIST variable.
+aux_source_directory(<model_name1> SRC_LIST)
+aux_source_directory(<model_name2> SRC_LIST)
 
-# 将当前目录下的相关文件都添加到变量SRC_LIST中，其他想用Clion编辑的文件也都加入到这里来
+# Add related files from the current directory to SRC_LIST. Include all files you want to edit in CLion.
 list(APPEND SRC_LIST
         xxx.c
 )
 
-
-# 将SRC_LIST中的文件编译成一个名为models的可执行文件（只是为了IDE提示用的，并不会实际编译）
+# Compile files in SRC_LIST into a dummy executable named "models" (for IDE suggestions only; no actual compilation).
 add_executable(models ${SRC_LIST})
-
 ```
-CMakeLists.txt的文件可以根据实际情况进行调整。
+Adjust the `CMakeLists.txt` file according to your specific requirements.
 
-创建完成后，使用CLion打开整个模型目录，即可使用CLion进行代码的查看、编辑、分析等操作。
-
+After creating the file, open the entire model folder in CLion to edit, analyze, and manage the code.
 
 ### 5.2 VSCode
+**To be completed...**
 
-To be completed...
+## 6. Notes
+1. OP-Plus modifies your model files. Always back up your files before using it. Although automatic backups are provided, we cannot guarantee 100% bug-free. **Users are responsible for any loss caused by this tool.**
+2. **Do not convert the same model multiple times**, as it may result in code loss. While OP-Plus has mechanisms to prevent duplicate conversions, exercise caution.
+3. After modifying a model in the IDE, manually open the corresponding `.pr.m` file in OPNET, click the compile button, and then run the simulation. (A more automated solution is in development.)
+4. Close the process model editor in OPNET before running OP-Plus to avoid conflicts caused by simultaneous modifications.
+5. If you need to use Chinese characters (including comments) in the code files, change the file encoding to GB2312 or GBK to avoid issues.
+6. The software is free to download and use but is closed-source and does not provide commercial support.
 
-## 6. 注意事项
-1. OP-Plus会修改你的模型文件，使用过程中请务必做好备份。尽管软件本身已经提供了自动模型备份，但我们无法100%保证本工具没有Bug，**使用本工具带来的一切损失由使用人自行负责。**
-2. 务必不要对同一模型进行重复转换，**会丢代码**。尽管软件本身已经提供了防止重复转换的机制，但是千万不要手贱。
-3. 每次在IDE中修改了某个模型，需要手动打开对应的pr.m文件，点击编译按钮编译，之后再运行仿真。（有解决方案，但是没时间整理，敬请期待）
-4. 每次执行OPP命令的时候，都建议关掉对应进程模型的编辑器，以防出现两方同时修改模型文件导致的冲突。
-5. 如果要在代码文件中使用中文（包括注释），建议将文件编码改为GB2312或GBK，避免出现问题。
-6. 软件目前提供免费下载和使用，但不开源，无商业支持。
+## 7. Donations
+If you find this tool useful, feel free to make a donation! 🥳🥳🥳
 
-## 7. 捐款
-如果有用的话可以扫码捐款 🥳🥳🥳
+![WeChat Pay](https://github.com/user-attachments/assets/dc08faa6-5612-4da4-8ac6-972541318cd9)
+![Alipay](https://github.com/user-attachments/assets/874c0c46-f7e5-40ce-a598-5899b261bb24)
 
-<img src="https://github.com/user-attachments/assets/dc08faa6-5612-4da4-8ac6-972541318cd9" width="200" alt="Wechat Pay" />
-<img src="https://github.com/user-attachments/assets/874c0c46-f7e5-40ce-a598-5899b261bb24" width="200" alt="Alipay" />
